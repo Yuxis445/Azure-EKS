@@ -15,7 +15,7 @@ resource "helm_release" "argocd" {
   version          = "5.35.0"
 
   values = [
-    "${file("values/argo.yaml")}"
+    "${file("./modules/argo_cd/values/argo.yaml")}"
   ]
 }
 
