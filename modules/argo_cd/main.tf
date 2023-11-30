@@ -95,7 +95,7 @@ spec:
   source:
     repoURL: https://github.com/Yuxis445/Azure-EKS
     targetRevision: HEAD
-    path: modules/argo-cd/apps
+    path: /modules/argo-cd/apps
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
