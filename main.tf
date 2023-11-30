@@ -14,3 +14,13 @@ module "vpc" {
   network_cidr = var.network_cidr
 
 }
+
+module "aks" {
+  depends_on = [ module.vpc ]
+  source = "./modules/aks"
+  rg_name = azurerm_resource_group.my-rg.name
+  rg_location = azurerm_resource_group.my-rg.location
+  environment = var.environment
+  # service_cidr = module.vpc.vnet_subnet_prefix
+  vnet_id = module.vpc.vnet_subnet_id
+}
