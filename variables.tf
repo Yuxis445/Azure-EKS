@@ -12,3 +12,9 @@ variable "network_cidr" {
   type = string
   default = "10.0.0.0/16"
 }
+
+variable "enable_argo" {
+  type = string
+  default = 1
+}
+

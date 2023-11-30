@@ -24,3 +24,10 @@ module "aks" {
   # service_cidr = module.vpc.vnet_subnet_prefix
   vnet_id = module.vpc.vnet_subnet_id
 }
+
+module "argo" {
+
+  source = "./modules/argo_cd"
+
+  enabled = var.enable_argo
+}

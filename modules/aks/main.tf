@@ -1,5 +1,9 @@
+locals {
+  env = "${var.environment}" == "" ? "" : "${var.environment}-"
+}
+
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
-  name                = "${var.environment}-aks"
+  name                = "${local.env}-aks"
   location            = var.rg_location
   resource_group_name = var.rg_name
   dns_prefix          = "testing-aks"
