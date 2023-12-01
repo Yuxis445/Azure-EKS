@@ -2,11 +2,11 @@
 # GLOBAL
 #==========================================
 global:
-  env: development
+  env: dev
   helmDefault: false
   valuesFile: values.yaml
   spec:
-    project: devops
+    project: main-project
     destination:
       server: https://kubernetes.default.svc
       namespace: argocd
