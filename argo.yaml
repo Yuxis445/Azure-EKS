@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: all-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name:  allApps
+spec:
+  project: main-project
+  source:
+    repoURL: https://github.com/Yuxis445/Azure-EKS
+    targetRevision: HEAD
+    path: "modules/argo_cd/apps"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true 
+    - PruneLast=true
+    managedNamespaceMetadata:
+      labels:
+        managed: argocd
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

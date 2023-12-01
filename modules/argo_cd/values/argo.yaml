@@ -2,6 +2,10 @@ global:
   image:
     tag: "v2.9.0"
 
+controller:
+  metrics:
+    enabled: true
+
 server:
   extraArgs:
     - --insecure

@@ -12,6 +12,8 @@
 # backend configuration
 backend.tf
 
+kubeconfig
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
