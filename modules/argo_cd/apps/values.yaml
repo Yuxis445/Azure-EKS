@@ -127,7 +127,7 @@ argocdApplications:
           datasources:
           - name: Prometheus
             type: prometheus
-            url: http://prometheus-development-server.prometheus-monitoring.svc.cluster.local
+            url: http://prometheus-dev-server.prometheus-monitoring.svc.cluster.local
       dashboardProviders:
         dashboardproviders.yaml:
           apiVersion: 1
