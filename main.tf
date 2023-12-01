@@ -26,7 +26,6 @@ module "aks" {
 }
 
 module "argo" {
-
   source = "./modules/argo_cd"
 
   enabled = var.enable_argo

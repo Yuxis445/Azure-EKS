@@ -25,10 +25,10 @@ provider "azurerm" {
 
 provider "helm" {
   kubernetes {
-    config_path = "./kubeconfig"
+    config_path = "~/.kube/config"
   }
 }
 
 provider "kubectl" {
-  config_path = "./kubeconfig"
+  config_path = "~/.kube/config"
 }
