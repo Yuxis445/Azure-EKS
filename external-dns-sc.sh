@@ -1,11 +1,31 @@
-# ExternalDNS needs permissions to make changes in Azure Private DNS. These permissions are roles assigned to the service principal used by ExternalDNS.
+#!/bin/bash
 
-# A service principal with a minimum access level of Private DNS Zone Contributor to the Private DNS zone(s) and Reader to the resource group containing the Azure Private DNS zone(s) is necessary. More powerful role-assignments like Owner or assignments on subscription-level work too.
+# Define variables
+CLUSTER_NAME="test--aks"
+RESOURCE_GROUP="resource-test"
+SUBSCRIPTION="Azure for Students"
 
-$ az ad sp create-for-rbac --skip-assignment -n http://externaldns-sp
-{
-  "appId": "appId GUID",  <-- aadClientId value
-  ...
-  "password": "password",  <-- aadClientSecret value
-  "tenant": "AzureAD Tenant Id"  <-- tenantId value
-}
+# # Run the command
+# az aks update \
+#   --name $CLUSTER_NAME \
+#   --resource-group $RESOURCE_GROUP \
+#   --subscription "$SUBSCRIPTION" \
+#   --enable-workload-identity \
+#   --enable-oidc-issuer
+
+issuerUrl=$(az aks show \
+  --name $CLUSTER_NAME \
+  --resource-group $RESOURCE_GROUP \
+  --subscription "$SUBSCRIPTION" \
+  --query oidcIssuerProfile.issuerUrl \
+  --output tsv)
+
+#   echo "Issuer URL: $issuerUrl"
+
+az identity federated-credential create \
+  --identity-name test--aks-agentpool \
+  --name external-dns-credentials \
+  --resource-group "MC_resource-test_test--aks_westus3" \
+  --subscription "$SUBSCRIPTION" \
+  --issuer $issuerUrl \
+  --subject "system:serviceaccount:external-dns:external-dns"
