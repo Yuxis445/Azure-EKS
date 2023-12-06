@@ -18,3 +18,7 @@ variable "enable_argo" {
   default = 1
 }
 
+variable "mydomain" {
+  type = string
+  default = "anontests.xyz"
+}

@@ -30,3 +30,8 @@ module "argo" {
 
   enabled = var.enable_argo
 }
+
+resource "azurerm_dns_zone" "aks-public-dns" {
+  name                = var.mydomain
+  resource_group_name = azurerm_resource_group.my-rg.name
+}
