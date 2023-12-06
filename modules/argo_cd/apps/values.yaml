@@ -181,6 +181,6 @@ argocdApplications:
             {
               "tenantId": "d55f6b89-e844-4c2b-b069-ef293ba546ff",
               "subscriptionId": "2cda291c-24de-4ef3-9811-45243a5369c1",
-              "resourceGroup": "MC_resource-test_test--aks_westus3",
+              "resourceGroup": "resource-test",
               "useWorkloadIdentityExtension": true
             }
