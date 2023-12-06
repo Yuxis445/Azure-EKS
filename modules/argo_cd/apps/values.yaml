@@ -167,6 +167,12 @@ argocdApplications:
       provider: azure
       rbac:
         create: true
+      serviceAccount:
+        create: true
+        annotations:
+          azure.workload.identity/client-id: "5d682b51-8aea-44cf-a55d-fc3eed86352c"
+      podLabels:
+        azure.workload.identity/use: "true"
       secretConfiguration:
         enabled: true
         mountPath: "/etc/kubernetes/"
