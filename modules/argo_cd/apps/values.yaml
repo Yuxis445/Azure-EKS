@@ -180,6 +180,6 @@ argocdApplications:
           azure.json: |
             {
               "subscriptionId": "2cda291c-24de-4ef3-9811-45243a5369c1",
-              "resourceGroup": "resource-test",
+              "resourceGroup": "MC_resource-test_test--aks_westus3",
               "useWorkloadIdentityExtension": true
             }
