@@ -22,10 +22,10 @@ issuerUrl=$(az aks show \
 
 #   echo "Issuer URL: $issuerUrl"
 
-az identity federated-credential create \
+az identity federated-credential update \
   --identity-name test--aks-agentpool \
   --name external-dns-credentials \
   --resource-group "MC_resource-test_test--aks_westus3" \
   --subscription "$SUBSCRIPTION" \
   --issuer $issuerUrl \
-  --subject "system:serviceaccount:external-dns:external-dns"
+  --subject "system:serviceaccount:external-dns-system:external-dns-dev" 
