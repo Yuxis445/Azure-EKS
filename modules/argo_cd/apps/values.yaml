@@ -173,3 +173,13 @@ argocdApplications:
           azure.workload.identity/client-id: "/subscriptions/2cda291c-24de-4ef3-9811-45243a5369c1/resourcegroups/MC_resource-test_test--aks_westus3/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test--aks-agentpool/federatedIdentityCredentials/external-dns-credentials"
       podLabels:
         azure.workload.identity/use: "true"
+      secretConfiguration:
+        enabled: true
+        mountPath: "/etc/kubernetes/"
+        data:
+          azure.json: |
+            {
+              "subscriptionId": "2cda291c-24de-4ef3-9811-45243a5369c1",
+              "resourceGroup": "resource-test",
+              "useWorkloadIdentityExtension": true
+            }
