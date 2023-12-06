@@ -145,42 +145,42 @@ argocdApplications:
           argocd:
             gnetId: 14584
             datasource: Prometheus
-  external-dns:
-    name: external-dns
-    repoURL: "https://kubernetes-sigs.github.io/external-dns"
-    targetRevision: 1.13.1
-    chart: "external-dns"
-    namespace: "external-dns-system"
-    disableAutomated: false
-    disable: false
-    hasPath: false
-    hasChart: true
-    helm: true
-    hasNameSpace: true
-    hasOpcinal: true
-    valuesHelm: |
-      fullNameOverride: external-dns
-      image:
-        repository: registry.k8s.io/external-dns/external-dns
-        tag: v0.13.1
-      policy: sync
-      provider: azure
-      rbac:
-        create: true
-      # serviceAccount:
-      #   create: true
-      #   annotations:
-      #     azure.workload.identity/client-id: "/subscriptions/2cda291c-24de-4ef3-9811-45243a5369c1/resourcegroups/MC_resource-test_test--aks_westus3/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test--aks-agentpool/federatedIdentityCredentials/external-dns-credentials"
-      # podLabels:
-      #   azure.workload.identity/use: "true"
-      secretConfiguration:
-        enabled: true
-        mountPath: "/etc/kubernetes/"
-        data:
-          azure.json: |
-            {
-              "tenantId": "d55f6b89-e844-4c2b-b069-ef293ba546ff",
-              "subscriptionId": "2cda291c-24de-4ef3-9811-45243a5369c1",
-              "resourceGroup": "resource-test",
-              "useWorkloadIdentityExtension": true
-            }
+  # external-dns:
+  #   name: external-dns
+  #   repoURL: "https://kubernetes-sigs.github.io/external-dns"
+  #   targetRevision: 1.13.1
+  #   chart: "external-dns"
+  #   namespace: "external-dns-system"
+  #   disableAutomated: false
+  #   disable: false
+  #   hasPath: false
+  #   hasChart: true
+  #   helm: true
+  #   hasNameSpace: true
+  #   hasOpcinal: true
+  #   valuesHelm: |
+  #     fullNameOverride: external-dns
+  #     image:
+  #       repository: registry.k8s.io/external-dns/external-dns
+  #       tag: v0.13.1
+  #     policy: sync
+  #     provider: azure
+  #     rbac:
+  #       create: true
+  #     # serviceAccount:
+  #     #   create: true
+  #     #   annotations:
+  #     #     azure.workload.identity/client-id: "/subscriptions/2cda291c-24de-4ef3-9811-45243a5369c1/resourcegroups/MC_resource-test_test--aks_westus3/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test--aks-agentpool/federatedIdentityCredentials/external-dns-credentials"
+  #     # podLabels:
+  #     #   azure.workload.identity/use: "true"
+  #     secretConfiguration:
+  #       enabled: true
+  #       mountPath: "/etc/kubernetes/"
+  #       data:
+  #         azure.json: |
+  #           {
+  #             "tenantId": "d55f6b89-e844-4c2b-b069-ef293ba546ff",
+  #             "subscriptionId": "2cda291c-24de-4ef3-9811-45243a5369c1",
+  #             "resourceGroup": "resource-test",
+  #             "useWorkloadIdentityExtension": true
+  #           }
