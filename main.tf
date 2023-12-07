@@ -25,11 +25,11 @@ module "aks" {
   vnet_id = module.vpc.vnet_subnet_id
 }
 
-module "argo" {
-  source = "./modules/argo_cd"
+# module "argo" {
+#   source = "./modules/argo_cd"
 
-  enabled = var.enable_argo
-}
+#   enabled = var.enable_argo
+# }
 
 resource "azurerm_dns_zone" "aks-public-dns" {
   name                = var.mydomain
