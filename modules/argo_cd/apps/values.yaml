@@ -51,19 +51,8 @@ argocdApplications:
     hasOpcinal: true
     valuesHelm: |
       controller:
-        resources:
-          limits:
-            cpu: 200m
-            memory: 180Mi
-          requests:
-            cpu: 100m
-            memory: 90Mi
-          # autoscaling:
-          #   enabled: enable
-          #   minReplicas: 1
-          #   maxReplicas: 2
-          #   targetCPUUtilizationPercentage: 80
-          #   targetMemoryUtilizationPercentage: 80
+        service:
+          externalTrafficPolicy: "Local"
         metrics:
           enabled: true
         podAnnotations:

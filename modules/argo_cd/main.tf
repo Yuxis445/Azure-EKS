@@ -119,3 +119,89 @@ spec:
 YAML
   depends_on = [helm_release.argocd]
 }
+
+resource "kubernetes_ingress_v1" "argo_cd_ingress" {
+  depends_on = [helm_release.argocd]
+
+  metadata {
+    name      = "argocd"
+    namespace = "argocd"
+    annotations = {
+      # "cert-manager.io/cluster-issuer"                    = "letsencrypt-staging"
+      # "nginx.ingress.kubernetes.io/backend-protocol"      = "HTTPS"
+      # "nginx.ingress.kubernetes.io/proxy-connect-timeout" = "300"
+      # "nginx.ingress.kubernetes.io/proxy-read-timeout"    = "300"
+      # "nginx.ingress.kubernetes.io/proxy-send-timeout"    = "300"
+      "ingress.kubernetes.io/force-ssl-redirect"          = "false"
+      "external-dns.alpha.kubernetes.io/hostname"         = "argocd.anontests.xyz"
+      # "nginx.ingress.kubernetes.io/ssl-passthrough"       = "false"
+    }
+  }
+
+  spec {
+    # tls {
+    #   hosts       = ["argocd.sandbox.test.internal.reecedev.us"]
+    #   secret_name = "internal-reecedev"
+    # }
+    ingress_class_name = "nginx"
+    rule {
+      host = "argocd.anontests.xyz"
+      http {
+        path {
+          path_type = "Prefix"
+          path      = "/"
+          backend {
+            service {
+              name = "argocd-release-server"
+              port {
+                name = "http"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+resource "kubernetes_ingress_v1" "grafana" {
+  metadata {
+    name      = "grafana"
+    namespace = "grafana-monitoring"
+    annotations = {
+      # "cert-manager.io/cluster-issuer"                    = "letsencrypt-staging"
+      # "nginx.ingress.kubernetes.io/backend-protocol"      = "HTTP"
+      # "nginx.ingress.kubernetes.io/proxy-connect-timeout" = "300"
+      # "nginx.ingress.kubernetes.io/proxy-read-timeout"    = "300"
+      # "nginx.ingress.kubernetes.io/proxy-send-timeout"    = "300"
+      # "ingress.kubernetes.io/force-ssl-redirect"          = "false"
+      "external-dns.alpha.kubernetes.io/hostname"         = "grafana.anontests.xyz"
+      # "nginx.ingress.kubernetes.io/ssl-passthrough"       = "false"     
+    }
+  }
+
+  spec {
+    # tls {
+    #   hosts       = ["argocd.sandbox.test.internal.reecedev.us"]
+    #   secret_name = "internal-reecedev"
+    # }
+    ingress_class_name = "nginx"
+    rule {
+      host = "grafana.anontests.xyz"
+      http {
+        path {
+          path_type = "Prefix"
+          path      = "/"
+          backend {
+            service {
+              name = "grafana-dev"
+              port {
+                number = 80
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
